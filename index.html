@@ -1,714 +1,904 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Wish by Saws - Digital Menu</title>
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        body {
-            font-family: 'Arial', sans-serif;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            min-height: 100vh;
-            padding: 20px;
-        }
-
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            background: white;
-            border-radius: 20px;
-            overflow: hidden;
-            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
-        }
-
-        .header {
-            background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
-            color: white;
-            padding: 40px 20px;
-            text-align: center;
-        }
-
-        .header h1 {
-            font-size: 3em;
-            margin-bottom: 10px;
-            letter-spacing: 2px;
-        }
-
-        .header p {
-            font-size: 1.2em;
-            opacity: 0.9;
-        }
-
-        .menu-nav {
-            background: #f8f9fa;
-            padding: 15px;
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
-            gap: 10px;
-            border-bottom: 2px solid #e0e0e0;
-        }
-
-        .nav-btn {
-            padding: 10px 20px;
-            background: white;
-            border: 2px solid #2a5298;
-            color: #2a5298;
-            border-radius: 25px;
-            cursor: pointer;
-            font-weight: bold;
-            transition: all 0.3s;
-        }
-
-        .nav-btn:hover, .nav-btn.active {
-            background: #2a5298;
-            color: white;
-        }
-
-        .content {
-            padding: 30px 20px;
-        }
-
-        .category {
-            margin-bottom: 50px;
-        }
-
-        .category-title {
-            font-size: 2.5em;
-            color: #2a5298;
-            margin-bottom: 30px;
-            padding-bottom: 15px;
-            border-bottom: 3px solid #2a5298;
-            text-align: center;
-        }
-
-        .menu-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-            gap: 30px;
-        }
-
-        .menu-item {
-            background: white;
-            border-radius: 15px;
-            overflow: hidden;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-            transition: transform 0.3s, box-shadow 0.3s;
-        }
-
-        .menu-item:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 25px rgba(0,0,0,0.15);
-        }
-
-        .menu-item img {
-            width: 100%;
-            height: 250px;
-            object-fit: cover;
-        }
-
-        .menu-item-info {
-            padding: 20px;
-        }
-
-        .menu-item-name {
-            font-size: 1.4em;
-            font-weight: bold;
-            color: #333;
-            margin-bottom: 10px;
-        }
-
-        .menu-item-details {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-top: 15px;
-        }
-
-        .menu-item-price {
-            font-size: 1.5em;
-            font-weight: bold;
-            color: #2a5298;
-        }
-
-        .menu-item-cal {
-            font-size: 0.9em;
-            color: #666;
-            background: #f0f0f0;
-            padding: 5px 10px;
-            border-radius: 15px;
-        }
-
-        .menu-item-desc {
-            color: #666;
-            font-size: 0.9em;
-            margin-top: 10px;
-            line-height: 1.5;
-        }
-
-        .footer {
-            background: #2a5298;
-            color: white;
-            text-align: center;
-            padding: 30px 20px;
-            margin-top: 50px;
-        }
-
-        @media (max-width: 768px) {
-            .header h1 {
-                font-size: 2em;
-            }
-
-            .menu-grid {
-                grid-template-columns: 1fr;
-            }
-
-            .category-title {
-                font-size: 1.8em;
-            }
-        }
-    </style>
-</head>
-<body>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
     <div class="container">
-        <div class="header">
-            <h1>Wish.</h1>
-            <p>by Saws</p>
-            <p style="margin-top: 15px; font-size: 1em;">Everything You Wish For</p>
+      <div class="header">
+        <h1>Wish.</h1>
+        <p>by Saws</p>
+        <p style="margin-top: 15px; font-size: 1em">Everything You Wish For</p>
+      </div>
+
+      <div class="menu-nav">
+        <button class="nav-btn active" onclick="showCategory('all')">
+          All Items
+        </button>
+        <button class="nav-btn" onclick="showCategory('pizza')">Pizza</button>
+        <button class="nav-btn" onclick="showCategory('sandwich')">
+          Sandwiches
+        </button>
+        <button class="nav-btn" onclick="showCategory('coffee')">Coffee</button>
+        <button class="nav-btn" onclick="showCategory('matcha')">Matcha</button>
+        <button class="nav-btn" onclick="showCategory('drinks')">
+          Drinks & Juices
+        </button>
+        <button class="nav-btn" onclick="showCategory('bowls')">Bowls</button>
+        <button class="nav-btn" onclick="showCategory('desserts')">
+          Desserts
+        </button>
+      </div>
+
+      <div class="content">
+        <!-- PIZZA SECTION -->
+        <div class="category" data-category="pizza">
+          <h2 class="category-title">🍕 Pizza</h2>
+          <div class="menu-grid">
+            <div class="menu-item">
+              <img src="images/pizza/1000010416.jpg" alt="Margherita Pizza" />
+              <div class="menu-item-info">
+                <div class="menu-item-name">Margherita Pizza</div>
+                <div class="menu-item-desc">
+                  Rich tomato sauce, fresh mozzarella cheese, and aromatic basil
+                  leaves. Simple, cheesy, and full of fresh flavor.
+                </div>
+                <div class="menu-item-details">
+                  <span class="menu-item-price">29 SR</span>
+                  <span class="menu-item-cal">550 cal</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="menu-item">
+              <img src="images/pizza/1000010419.jpg" alt="Pepperoni Pizza" />
+              <div class="menu-item-info">
+                <div class="menu-item-name">Pepperoni Pizza</div>
+                <div class="menu-item-desc">
+                  Sliced pepperoni with rich tomato sauce, fresh mozzarella
+                  cheese, and aromatic basil leaves. Simple, cheesy, and full of
+                  fresh flavor.
+                </div>
+                <div class="menu-item-details">
+                  <span class="menu-item-price">35 SR</span>
+                  <span class="menu-item-cal">570 cal</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="menu-item">
+              <img src="images/pizza/1000010422.jpg" alt="Chicken Pizza" />
+              <div class="menu-item-info">
+                <div class="menu-item-name">Chicken Pizza</div>
+                <div class="menu-item-desc">
+                  Chicken and mozzarella on freshly prepared our signature
+                  secret sauce and perfect flavor.
+                </div>
+                <div class="menu-item-details">
+                  <span class="menu-item-price">35 SR</span>
+                  <span class="menu-item-cal">570 cal</span>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
 
-        <div class="menu-nav">
-            <button class="nav-btn active" onclick="showCategory('all')">All Items</button>
-            <button class="nav-btn" onclick="showCategory('pizza')">Pizza</button>
-            <button class="nav-btn" onclick="showCategory('sandwich')">Sandwiches</button>
-            <button class="nav-btn" onclick="showCategory('coffee')">Coffee</button>
-            <button class="nav-btn" onclick="showCategory('matcha')">Matcha</button>
-            <button class="nav-btn" onclick="showCategory('drinks')">Drinks & Juices</button>
-            <button class="nav-btn" onclick="showCategory('bowls')">Bowls</button>
-            <button class="nav-btn" onclick="showCategory('desserts')">Desserts</button>
+        <!-- SANDWICH SECTION -->
+        <div class="category" data-category="sandwich">
+          <h2 class="category-title">🥪 Sandwiches</h2>
+          <div class="menu-grid">
+            <div class="menu-item">
+              <img src="images/sandwich/1000010452.jpg" alt="Tuna Sandwich" />
+
+              <div class="menu-item-info">
+                <div class="menu-item-name">Chicken Sandwich</div>
+                <div class="menu-item-desc">
+                  Chicken breast, mayonnaise, mustard, dried berries, green
+                  apple, celery
+                </div>
+                <div class="menu-item-details">
+                  <span class="menu-item-price">26 SR</span>
+                  <span class="menu-item-cal">365 cal</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="menu-item">
+              <img
+                src="images/sandwich/1000010455.jpg"
+                alt="Chicken Sandwich"
+              />
+              <div class="menu-item-info">
+                <div class="menu-item-name">Tuna Sandwich</div>
+                <div class="menu-item-desc">
+                  Tuna with cucumber, mayo, yogurt, and a touch of vinegar -
+                  light, creamy, and refreshing.
+                </div>
+                <div class="menu-item-details">
+                  <span class="menu-item-price">24 SR</span>
+                  <span class="menu-item-cal">320 cal</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="menu-item">
+              <img
+                src="images/sandwich/1000010434.jpg"
+                alt="Burrata Sandwich"
+              />
+              <div class="menu-item-info">
+                <div class="menu-item-name">Burrata Sandwich</div>
+                <div class="menu-item-desc">
+                  Burrata cheese and pesto, rocca, sundried tomatoes with
+                  balsamic sauce
+                </div>
+                <div class="menu-item-details">
+                  <span class="menu-item-price">26 SR</span>
+                  <span class="menu-item-cal">350 cal</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="menu-item">
+              <img src="images/sandwich/1000010449.jpg" alt="Turkey Sandwich" />
+              <div class="menu-item-info">
+                <div class="menu-item-name">Turkey Sandwich</div>
+                <div class="menu-item-desc">
+                  Fresh dough bread, filled with premium turkey slices, melted
+                  cheese, fresh tomatoes, and lettuce
+                </div>
+                <div class="menu-item-details">
+                  <span class="menu-item-price">26 SR</span>
+                  <span class="menu-item-cal">470 cal</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="menu-item">
+              <img src="images/sandwich/1000010452.jpg" alt="Eggs Sandwich" />
+              <div class="menu-item-info">
+                <div class="menu-item-name">Eggs Sandwich</div>
+                <div class="menu-item-desc">
+                  Made with eggs, mayonnaise, mustard, salt, and lettuce
+                </div>
+                <div class="menu-item-details">
+                  <span class="menu-item-price">17 SR</span>
+                  <span class="menu-item-cal">350 cal</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="menu-item">
+              <img
+                src="images/sandwich/1000010431.jpg"
+                alt="Mix Sandwich Box"
+              />
+              <div class="menu-item-info">
+                <div class="menu-item-name">Mix Sandwich Box</div>
+                <div class="menu-item-desc">
+                  Included burrata, chicken and tuna, turkey secret sauce,
+                  potato chips
+                </div>
+                <div class="menu-item-details">
+                  <span class="menu-item-price">99 SR</span>
+                  <span class="menu-item-cal">900 cal</span>
+                </div>
+              </div>
+            </div>
+            <div class="menu-item">
+              <img
+                src="images/sandwich/1000010431.jpg"
+                alt="Mix Sandwich Box"
+              />
+              <div class="menu-item-info">
+                <div class="menu-item-name">Tuna Sandwich Box</div>
+                <div class="menu-item-desc">
+                  Included 12 slices pita, secret sauce with potato chips.
+                </div>
+                <div class="menu-item-details">
+                  <span class="menu-item-price">99 SR</span>
+                  <span class="menu-item-cal">900 cal</span>
+                </div>
+              </div>
+            </div>
+            <div class="menu-item">
+              <img
+                src="images/sandwich/1000010431.jpg"
+                alt="Mix Sandwich Box"
+              />
+              <div class="menu-item-info">
+                <div class="menu-item-name">Chicken Sandwich Box</div>
+                <div class="menu-item-desc">
+                  Included 12 slices pita, secret sauce with potato chips.
+                </div>
+                <div class="menu-item-details">
+                  <span class="menu-item-price">99 SR</span>
+                  <span class="menu-item-cal">900 cal</span>
+                </div>
+              </div>
+            </div>
+            <div class="menu-item">
+              <img
+                src="images/sandwich/1000010431.jpg"
+                alt="Mix Sandwich Box"
+              />
+              <div class="menu-item-info">
+                <div class="menu-item-name">Burata Sandwich Box</div>
+                <div class="menu-item-desc">
+                  Included 12 slices pita, secret sauce with potato chips.
+                </div>
+                <div class="menu-item-details">
+                  <span class="menu-item-price">99 SR</span>
+                  <span class="menu-item-cal">900 cal</span>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
 
-        <div class="content">
-            <!-- PIZZA SECTION -->
-            <div class="category" data-category="pizza">
-                <h2 class="category-title">🍕 Pizza</h2>
-                <div class="menu-grid">
-                    <div class="menu-item">
-                        <img src="images/1000010419.jpg" alt="Margherita Pizza">
-                        <div class="menu-item-info">
-                            <div class="menu-item-name">Margherita Pizza</div>
-                            <div class="menu-item-desc">Rich tomato sauce, fresh mozzarella cheese, and aromatic basil leaves. Simple, cheesy, and full of fresh flavor.</div>
-                            <div class="menu-item-details">
-                                <span class="menu-item-price">29 SR</span>
-                                <span class="menu-item-cal">550 cal</span>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="menu-item">
-                        <img src="images/1000010422.jpg" alt="Pepperoni Pizza">
-                        <div class="menu-item-info">
-                            <div class="menu-item-name">Pepperoni Pizza</div>
-                            <div class="menu-item-desc">Sliced pepperoni with rich tomato sauce, fresh mozzarella cheese, and aromatic basil leaves. Simple, cheesy, and full of fresh flavor.</div>
-                            <div class="menu-item-details">
-                                <span class="menu-item-price">35 SR</span>
-                                <span class="menu-item-cal">570 cal</span>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="menu-item">
-                        <img src="images/1000010416.jpg" alt="Chicken Pizza">
-                        <div class="menu-item-info">
-                            <div class="menu-item-name">Chicken Pizza</div>
-                            <div class="menu-item-desc">Chicken and mozzarella on freshly prepared our signature secret sauce and perfect flavor.</div>
-                            <div class="menu-item-details">
-                                <span class="menu-item-price">35 SR</span>
-                                <span class="menu-item-cal">570 cal</span>
-                            </div>
-                        </div>
-                    </div>
+        <!-- COFFEE SECTION -->
+        <div class="category" data-category="coffee">
+          <h2 class="category-title">☕ Coffee</h2>
+          <div class="menu-grid">
+            <div class="menu-item">
+              <img
+                src="images/coffee/WhatsApp Image 2026-02-03 at 3.43.32 PM.jpeg"
+                alt="Cappuccino"
+              />
+              <div class="menu-item-info">
+                <div class="menu-item-name">Cappuccino</div>
+                <div class="menu-item-desc">
+                  Double shot espresso with hot foam, and steam milk
                 </div>
+                <div class="menu-item-details">
+                  <span class="menu-item-price">17 SR</span>
+                  <span class="menu-item-cal">125 cal</span>
+                </div>
+              </div>
             </div>
 
-            <!-- SANDWICH SECTION -->
-            <div class="category" data-category="sandwich">
-                <h2 class="category-title">🥪 Sandwiches</h2>
-                <div class="menu-grid">
-                    <div class="menu-item">
-                        <img src="images/1000010440.jpg" alt="Chicken Sandwich">
-                        <div class="menu-item-info">
-                            <div class="menu-item-name">Chicken Sandwich</div>
-                            <div class="menu-item-desc">Chicken breast, mayonnaise, mustard, dried berries, green apple, celery</div>
-                            <div class="menu-item-details">
-                                <span class="menu-item-price">26 SR</span>
-                                <span class="menu-item-cal">365 cal</span>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="menu-item">
-                        <img src="images/1000010455.jpg" alt="Tuna Sandwich">
-                        <div class="menu-item-info">
-                            <div class="menu-item-name">Tuna Sandwich</div>
-                            <div class="menu-item-desc">Tuna with cucumber, mayo, yogurt, and a touch of vinegar - light, creamy, and refreshing.</div>
-                            <div class="menu-item-details">
-                                <span class="menu-item-price">24 SR</span>
-                                <span class="menu-item-cal">320 cal</span>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="menu-item">
-                        <img src="images/1000010434.jpg" alt="Burrata Sandwich">
-                        <div class="menu-item-info">
-                            <div class="menu-item-name">Burrata Sandwich</div>
-                            <div class="menu-item-desc">Burrata cheese and pesto, rocca, sundried tomatoes with balsamic sauce</div>
-                            <div class="menu-item-details">
-                                <span class="menu-item-price">26 SR</span>
-                                <span class="menu-item-cal">350 cal</span>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="menu-item">
-                        <img src="images/1000010449.jpg" alt="Turkey Sandwich">
-                        <div class="menu-item-info">
-                            <div class="menu-item-name">Turkey Sandwich</div>
-                            <div class="menu-item-desc">Fresh dough bread, filled with premium turkey slices, melted cheese, fresh tomatoes, and lettuce</div>
-                            <div class="menu-item-details">
-                                <span class="menu-item-price">26 SR</span>
-                                <span class="menu-item-cal">470 cal</span>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="menu-item">
-                        <img src="images/1000010452.jpg" alt="Eggs Sandwich">
-                        <div class="menu-item-info">
-                            <div class="menu-item-name">Eggs Sandwich</div>
-                            <div class="menu-item-desc">Made with eggs, mayonnaise, mustard, salt, and lettuce</div>
-                            <div class="menu-item-details">
-                                <span class="menu-item-price">17 SR</span>
-                                <span class="menu-item-cal">350 cal</span>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="menu-item">
-                        <img src="images/1000010431.jpg" alt="Mix Sandwich Box">
-                        <div class="menu-item-info">
-                            <div class="menu-item-name">Mix Sandwich Box</div>
-                            <div class="menu-item-desc">Included burrata, chicken and tuna, turkey secret sauce, potato chips</div>
-                            <div class="menu-item-details">
-                                <span class="menu-item-price">99 SR</span>
-                                <span class="menu-item-cal">900 cal</span>
-                            </div>
-                        </div>
-                    </div>
+            <div class="menu-item">
+              <img
+                src="images/coffee/WhatsApp Image 2026-02-03 at 3.44.22 PM.jpeg"
+                alt="Hot Latte"
+              />
+              <div class="menu-item-info">
+                <div class="menu-item-name">Macchiato</div>
+                <div class="menu-item-desc">
+                  Double shot espresso and hot foam
                 </div>
+                <div class="menu-item-details">
+                  <span class="menu-item-price">15 SR</span>
+                  <span class="menu-item-cal">30 cal</span>
+                </div>
+              </div>
             </div>
 
-            <!-- COFFEE SECTION -->
-            <div class="category" data-category="coffee">
-                <h2 class="category-title">☕ Coffee</h2>
-                <div class="menu-grid">
-                    <div class="menu-item">
-                        <img src="images/1000010509.jpg" alt="Cappuccino">
-                        <div class="menu-item-info">
-                            <div class="menu-item-name">Cappuccino</div>
-                            <div class="menu-item-desc">Double shot espresso with hot foam, and steam milk</div>
-                            <div class="menu-item-details">
-                                <span class="menu-item-price">17 SR</span>
-                                <span class="menu-item-cal">125 cal</span>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="menu-item">
-                        <img src="images/1000010515.jpg" alt="Hot Latte">
-                        <div class="menu-item-info">
-                            <div class="menu-item-name">Hot Latte</div>
-                            <div class="menu-item-desc">Double shot espresso and hot milk</div>
-                            <div class="menu-item-details">
-                                <span class="menu-item-price">17 SR</span>
-                                <span class="menu-item-cal">2 cal</span>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="menu-item">
-                        <img src="images/1000010542.jpg" alt="Espresso">
-                        <div class="menu-item-info">
-                            <div class="menu-item-name">Espresso</div>
-                            <div class="menu-item-desc">Double shot espresso</div>
-                            <div class="menu-item-details">
-                                <span class="menu-item-price">13 SR</span>
-                                <span class="menu-item-cal">2 cal</span>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="menu-item">
-                        <img src="images/1000010518.jpg" alt="Flat White">
-                        <div class="menu-item-info">
-                            <div class="menu-item-name">Flat White</div>
-                            <div class="menu-item-desc">Double shot espresso and steam milk</div>
-                            <div class="menu-item-details">
-                                <span class="menu-item-price">16 SR</span>
-                                <span class="menu-item-cal">76 cal</span>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="menu-item">
-                        <img src="images/1000010521.jpg" alt="Americano">
-                        <div class="menu-item-info">
-                            <div class="menu-item-name">Americano</div>
-                            <div class="menu-item-desc">Double shot espresso with hot water</div>
-                            <div class="menu-item-details">
-                                <span class="menu-item-price">14 SR</span>
-                                <span class="menu-item-cal">2 cal</span>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="menu-item">
-                        <img src="images/1000010527.jpg" alt="Hot Chocolate">
-                        <div class="menu-item-info">
-                            <div class="menu-item-name">Hot Chocolate</div>
-                            <div class="menu-item-desc">Made with premium chocolate powder with hot milk</div>
-                            <div class="menu-item-details">
-                                <span class="menu-item-price">15 SR</span>
-                                <span class="menu-item-cal">176 cal</span>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="menu-item">
-                        <img src="images/1000010533.jpg" alt="Hot Spanish Latte">
-                        <div class="menu-item-info">
-                            <div class="menu-item-name">Hot Spanish Latte</div>
-                            <div class="menu-item-desc">Espresso coffee with steamed milk and sweetened condensed milk</div>
-                            <div class="menu-item-details">
-                                <span class="menu-item-price">19 SR</span>
-                                <span class="menu-item-cal">350 cal</span>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="menu-item">
-                        <img src="images/1000010524.jpg" alt="Ice Latte">
-                        <div class="menu-item-info">
-                            <div class="menu-item-name">Ice Latte</div>
-                            <div class="menu-item-desc">Double shot espresso with ice and cold milk</div>
-                            <div class="menu-item-details">
-                                <span class="menu-item-price">20 SR</span>
-                                <span class="menu-item-cal">151 cal</span>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="menu-item">
-                        <img src="images/1000010530.jpg" alt="Ice Spanish Latte">
-                        <div class="menu-item-info">
-                            <div class="menu-item-name">Ice Spanish Latte</div>
-                            <div class="menu-item-desc">Double shot espresso with house signature spanish mixture</div>
-                            <div class="menu-item-details">
-                                <span class="menu-item-price">24 SR</span>
-                                <span class="menu-item-cal">355 cal</span>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="menu-item">
-                        <img src="images/1000010536.jpg" alt="Ice Americano">
-                        <div class="menu-item-info">
-                            <div class="menu-item-name">Ice Americano</div>
-                            <div class="menu-item-desc">Double shots espresso with ice and still water</div>
-                            <div class="menu-item-details">
-                                <span class="menu-item-price">17 SR</span>
-                                <span class="menu-item-cal">2 cal</span>
-                            </div>
-                        </div>
-                    </div>
+            <div class="menu-item">
+              <img
+                src="images/coffee/WhatsApp Image 2026-02-03 at 3.44.57 PM.jpeg"
+                alt="Espresso"
+              />
+              <div class="menu-item-info">
+                <div class="menu-item-name">Cortado</div>
+                <div class="menu-item-desc">
+                  Double shot espresso and steam milk
                 </div>
+                <div class="menu-item-details">
+                  <span class="menu-item-price">15 SR</span>
+                  <span class="menu-item-cal">43 cal</span>
+                </div>
+              </div>
             </div>
 
-            <!-- MATCHA SECTION -->
-            <div class="category" data-category="matcha">
-                <h2 class="category-title">🍵 Matcha</h2>
-                <div class="menu-grid">
-                    <div class="menu-item">
-                        <img src="images/1000010506.jpg" alt="Matcha Latte">
-                        <div class="menu-item-info">
-                            <div class="menu-item-name">Matcha Latte (Hot)</div>
-                            <div class="menu-item-desc">Matcha powder with hot milk</div>
-                            <div class="menu-item-details">
-                                <span class="menu-item-price">24 SR</span>
-                                <span class="menu-item-cal">355 cal</span>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="menu-item">
-                        <img src="images/1000010512.jpg" alt="Ice Matcha Latte">
-                        <div class="menu-item-info">
-                            <div class="menu-item-name">Ice Matcha Latte</div>
-                            <div class="menu-item-desc">Matcha powder, ice and milk</div>
-                            <div class="menu-item-details">
-                                <span class="menu-item-price">24 SR</span>
-                                <span class="menu-item-cal">190 cal</span>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="menu-item">
-                        <img src="images/1000010503.jpg" alt="Ice Sweet Matcha">
-                        <div class="menu-item-info">
-                            <div class="menu-item-name">Ice Sweet Matcha</div>
-                            <div class="menu-item-desc">Matcha powder, spanish mixture milk and ice</div>
-                            <div class="menu-item-details">
-                                <span class="menu-item-price">26 SR</span>
-                                <span class="menu-item-cal">330 cal</span>
-                            </div>
-                        </div>
-                    </div>
+            <div class="menu-item">
+              <img
+                src="images/coffee/WhatsApp Image 2026-02-03 at 3.45.23 PM.jpeg"
+                alt="Flat White"
+              />
+              <div class="menu-item-info">
+                <div class="menu-item-name">Flat White</div>
+                <div class="menu-item-desc">
+                  Double shot espresso and steam milk
                 </div>
+                <div class="menu-item-details">
+                  <span class="menu-item-price">16 SR</span>
+                  <span class="menu-item-cal">76 cal</span>
+                </div>
+              </div>
             </div>
 
-            <!-- DRINKS & JUICES SECTION -->
-            <div class="category" data-category="drinks">
-                <h2 class="category-title">🍹 Drinks & Juices</h2>
-                <div class="menu-grid">
-                    <div class="menu-item">
-                        <img src="images/1000010476.jpg" alt="Fresh Orange Juice">
-                        <div class="menu-item-info">
-                            <div class="menu-item-name">Fresh Orange Juice</div>
-                            <div class="menu-item-desc">100% fresh juice</div>
-                            <div class="menu-item-details">
-                                <span class="menu-item-price">18 SR</span>
-                                <span class="menu-item-cal">128 cal</span>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="menu-item">
-                        <img src="images/1000010479.jpg" alt="Fresh Pineapple Juice">
-                        <div class="menu-item-info">
-                            <div class="menu-item-name">Fresh Pineapple Juice</div>
-                            <div class="menu-item-desc">100% fresh juice</div>
-                            <div class="menu-item-details">
-                                <span class="menu-item-price">18 SR</span>
-                                <span class="menu-item-cal">130 cal</span>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="menu-item">
-                        <img src="images/1000010494.jpg" alt="Protein Shake Vanilla">
-                        <div class="menu-item-info">
-                            <div class="menu-item-name">Protein Shake (Vanilla)</div>
-                            <div class="menu-item-desc">Made with banana, peanut butter and your choice of milk, protein powder 30g</div>
-                            <div class="menu-item-details">
-                                <span class="menu-item-price">24 SR</span>
-                                <span class="menu-item-cal">330 cal</span>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="menu-item">
-                        <img src="images/1000010500.jpg" alt="Protein Shake Chocolate">
-                        <div class="menu-item-info">
-                            <div class="menu-item-name">Protein Shake (Chocolate)</div>
-                            <div class="menu-item-desc">Made with banana, peanut butter and your choice of milk, protein powder 30g</div>
-                            <div class="menu-item-details">
-                                <span class="menu-item-price">24 SR</span>
-                                <span class="menu-item-cal">330 cal</span>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="menu-item">
-                        <img src="images/1000010497.jpg" alt="Lemon Mojito">
-                        <div class="menu-item-info">
-                            <div class="menu-item-name">Lemon Mojito</div>
-                            <div class="menu-item-desc">Fresh lemon & mint with lemon syrup</div>
-                            <div class="menu-item-details">
-                                <span class="menu-item-price">22 SR</span>
-                                <span class="menu-item-cal">243 cal</span>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="menu-item">
-                        <img src="images/1000010545.jpg" alt="Raspberry Mojito">
-                        <div class="menu-item-info">
-                            <div class="menu-item-name">Raspberry Mojito</div>
-                            <div class="menu-item-desc">Fresh raspberry, lemon, mint with raspberry syrup</div>
-                            <div class="menu-item-details">
-                                <span class="menu-item-price">25 SR</span>
-                                <span class="menu-item-cal">244 cal</span>
-                            </div>
-                        </div>
-                    </div>
+            <div class="menu-item">
+              <img
+                src="images/coffee/WhatsApp Image 2026-02-03 at 3.45.54 PM.jpeg"
+                alt="Americano"
+              />
+              <div class="menu-item-info">
+                <div class="menu-item-name">Americano</div>
+                <div class="menu-item-desc">
+                  Double shot espresso with hot water
                 </div>
+                <div class="menu-item-details">
+                  <span class="menu-item-price">14 SR</span>
+                  <span class="menu-item-cal">2 cal</span>
+                </div>
+              </div>
             </div>
 
-            <!-- BOWLS SECTION -->
-            <div class="category" data-category="bowls">
-                <h2 class="category-title">🥗 Bowls</h2>
-                <div class="menu-grid">
-                    <div class="menu-item">
-                        <img src="images/1000010458.jpg" alt="Cinnamon Oats Big">
-                        <div class="menu-item-info">
-                            <div class="menu-item-name">Cinnamon Oats (Big)</div>
-                            <div class="menu-item-desc">Oats, cinnamon, peanut butter, low fat milk, honey and whey protein 40g, fresh apple, pecan</div>
-                            <div class="menu-item-details">
-                                <span class="menu-item-price">31 SR</span>
-                                <span class="menu-item-cal">370 cal</span>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="menu-item">
-                        <img src="images/1000010539.jpg" alt="Cinnamon Oats Small">
-                        <div class="menu-item-info">
-                            <div class="menu-item-name">Cinnamon Oats (Small)</div>
-                            <div class="menu-item-desc">Oats, cinnamon, peanut butter, low fat milk, honey and whey protein 20g, fresh apple, pecan</div>
-                            <div class="menu-item-details">
-                                <span class="menu-item-price">18 SR</span>
-                                <span class="menu-item-cal">185 cal</span>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="menu-item">
-                        <img src="images/1000010461.jpg" alt="Fruits Oats Big">
-                        <div class="menu-item-info">
-                            <div class="menu-item-name">Fruits Oats (Big)</div>
-                            <div class="menu-item-desc">Oats, cinnamon, peanut butter, low fat milk, honey and whey protein 40g, raspberry, blueberry, banana</div>
-                            <div class="menu-item-details">
-                                <span class="menu-item-price">31 SR</span>
-                                <span class="menu-item-cal">370 cal</span>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="menu-item">
-                        <img src="images/1000010482.jpg" alt="Cilantro Salad">
-                        <div class="menu-item-info">
-                            <div class="menu-item-name">Cilantro Salad</div>
-                            <div class="menu-item-desc">Mix of iceberg lettuce, long lettuce, red cabbage, bell pepper, black olives, sun dried tomato, chicken breast, sweet corn, fried okra, fried chips and shredded fried potato. Served with house made cilantro sauce</div>
-                            <div class="menu-item-details">
-                                <span class="menu-item-price">26 SR</span>
-                                <span class="menu-item-cal">155 cal</span>
-                            </div>
-                        </div>
-                    </div>
+            <div class="menu-item">
+              <img
+                src="images/coffee/WhatsApp Image 2026-02-03 at 3.46.23 PM.jpeg"
+                alt="Hot Chocolate"
+              />
+              <div class="menu-item-info">
+                <div class="menu-item-name">V60</div>
+                <div class="menu-item-desc">grind beans serve fresh</div>
+                <div class="menu-item-details">
+                  <span class="menu-item-price">19 SR</span>
+                  <span class="menu-item-cal">10 cal</span>
                 </div>
+              </div>
             </div>
 
-            <!-- DESSERTS SECTION -->
-            <div class="category" data-category="desserts">
-                <h2 class="category-title">🍰 Desserts</h2>
-                <div class="menu-grid">
-                    <div class="menu-item">
-                        <img src="images/1000010470.jpg" alt="Mix Berry Cheesecake">
-                        <div class="menu-item-info">
-                            <div class="menu-item-name">Mix Berry Cheesecake</div>
-                            <div class="menu-item-desc">Premium cheese with raspberry sauce with fresh raspberry and blueberry</div>
-                            <div class="menu-item-details">
-                                <span class="menu-item-price">26 SR</span>
-                                <span class="menu-item-cal">450 cal</span>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="menu-item">
-                        <img src="images/1000010473.jpg" alt="Caramel Pecan Cheesecake">
-                        <div class="menu-item-info">
-                            <div class="menu-item-name">Caramel Pecan Cheesecake</div>
-                            <div class="menu-item-desc">Premium cheese with caramel sauce and caramelized pecan nuts</div>
-                            <div class="menu-item-details">
-                                <span class="menu-item-price">26 SR</span>
-                                <span class="menu-item-cal">450 cal</span>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="menu-item">
-                        <img src="images/1000010464.jpg" alt="Tiramisu">
-                        <div class="menu-item-info">
-                            <div class="menu-item-name">Tiramisu</div>
-                            <div class="menu-item-desc">With espresso shot bonomi biscuits, mascarpone cheese, whipping cream</div>
-                            <div class="menu-item-details">
-                                <span class="menu-item-price">26 SR</span>
-                                <span class="menu-item-cal">520 cal</span>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="menu-item">
-                        <img src="images/1000010467.jpg" alt="Chocolate Banana Cake">
-                        <div class="menu-item-info">
-                            <div class="menu-item-name">Chocolate Banana Cake</div>
-                            <div class="menu-item-desc">Chocolate flavour with banana mix</div>
-                            <div class="menu-item-details">
-                                <span class="menu-item-price">13 SR</span>
-                                <span class="menu-item-cal">302 cal</span>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="menu-item">
-                        <img src="images/1000010488.jpg" alt="Gishd">
-                        <div class="menu-item-info">
-                            <div class="menu-item-name">Gishd</div>
-                            <div class="menu-item-desc">Made with date pecan with caramel mixed</div>
-                            <div class="menu-item-details">
-                                <span class="menu-item-price">13 SR</span>
-                                <span class="menu-item-cal">210 cal</span>
-                            </div>
-                        </div>
-                    </div>
+            <div class="menu-item">
+              <img
+                src="images/coffee/WhatsApp Image 2026-02-03 at 3.46.58 PM.jpeg"
+                alt="Hot Spanish Latte"
+              />
+              <div class="menu-item-info">
+                <div class="menu-item-name">Coffee Day Big Size</div>
+                <div class="menu-item-desc">
+                  Daily fresh Hamela Ethiopia beans
                 </div>
+                <div class="menu-item-details">
+                  <span class="menu-item-price">19 SR</span>
+                  <span class="menu-item-cal">350 cal</span>
+                </div>
+              </div>
             </div>
+
+            <div class="menu-item">
+              <img
+                src="images/coffee/WhatsApp Image 2026-02-03 at 3.48.03 PM.jpeg"
+                alt="Ice Latte"
+              />
+              <div class="menu-item-info">
+                <div class="menu-item-name">Coffee Day Small Size</div>
+                <div class="menu-item-desc">
+                  Daily fresh Hamela Ethiopia beans
+                </div>
+                <div class="menu-item-details">
+                  <span class="menu-item-price">20 SR</span>
+                  <span class="menu-item-cal">151 cal</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="menu-item">
+              <img
+                src="images/coffee/WhatsApp Image 2026-02-03 at 3.49.50 PM.jpeg"
+                alt="Ice Spanish Latte"
+              />
+              <div class="menu-item-info">
+                <div class="menu-item-name">Matcha Latte</div>
+                <div class="menu-item-desc">Matcha powder with hot milk</div>
+                <div class="menu-item-details">
+                  <span class="menu-item-price">24 SR</span>
+                  <span class="menu-item-cal">355 cal</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="menu-item">
+              <img
+                src="images/coffee/WhatsApp Image 2026-02-03 at 3.50.23 PM.jpeg"
+                alt="Ice Americano"
+              />
+              <div class="menu-item-info">
+                <div class="menu-item-name">Ice Americano</div>
+                <div class="menu-item-desc">
+                  Double shots espresso with ice and still water
+                </div>
+                <div class="menu-item-details">
+                  <span class="menu-item-price">17 SR</span>
+                  <span class="menu-item-cal">2 cal</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="menu-item">
+              <img
+                src="images/coffee/WhatsApp Image 2026-02-03 at 3.50.55 PM.jpeg"
+                alt="Ice Americano"
+              />
+              <div class="menu-item-info">
+                <div class="menu-item-name">Ice Americano</div>
+                <div class="menu-item-desc">
+                  Double shots espresso with ice and still water
+                </div>
+                <div class="menu-item-details">
+                  <span class="menu-item-price">17 SR</span>
+                  <span class="menu-item-cal">2 cal</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="menu-item">
+              <img
+                src="images/coffee/WhatsApp Image 2026-02-03 at 3.54.05 PM.jpeg"
+                alt="Ice Americano"
+              />
+              <div class="menu-item-info">
+                <div class="menu-item-name">Ice Americano</div>
+                <div class="menu-item-desc">
+                  Double shots espresso with ice and still water
+                </div>
+                <div class="menu-item-details">
+                  <span class="menu-item-price">17 SR</span>
+                  <span class="menu-item-cal">2 cal</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="menu-item">
+              <img
+                src="images/coffee/WhatsApp Image 2026-02-03 at 3.55.42 PM.jpeg"
+                alt="Ice Americano"
+              />
+              <div class="menu-item-info">
+                <div class="menu-item-name">Ice Americano</div>
+                <div class="menu-item-desc">
+                  Double shots espresso with ice and still water
+                </div>
+                <div class="menu-item-details">
+                  <span class="menu-item-price">17 SR</span>
+                  <span class="menu-item-cal">2 cal</span>
+                </div>
+              </div>
+            </div>
+            <!-- -- -->
+            <div class="menu-item">
+              <img
+                src="images/coffee/WhatsApp Image 2026-02-03 at 3.55.42 PM.jpeg"
+                alt="Ice Americano"
+              />
+              <div class="menu-item-info">
+                <div class="menu-item-name">Ice Americano</div>
+                <div class="menu-item-desc">
+                  Double shots espresso with ice and still water
+                </div>
+                <div class="menu-item-details">
+                  <span class="menu-item-price">17 SR</span>
+                  <span class="menu-item-cal">2 cal</span>
+                </div>
+              </div>
+            </div>
+            <div class="menu-item">
+              <img
+                src="images/coffee/WhatsApp Image 2026-02-03 at 3.50.23 PM.jpeg"
+                alt="Ice Americano"
+              />
+              <div class="menu-item-info">
+                <div class="menu-item-name">Ice Americano</div>
+                <div class="menu-item-desc">
+                  Double shots espresso with ice and still water
+                </div>
+                <div class="menu-item-details">
+                  <span class="menu-item-price">17 SR</span>
+                  <span class="menu-item-cal">2 cal</span>
+                </div>
+              </div>
+            </div>
+            <div class="menu-item">
+              <img
+                src="images/coffee/WhatsApp Image 2026-02-03 at 3.58.52 PM.jpeg"
+                alt="Ice Americano"
+              />
+              <div class="menu-item-info">
+                <div class="menu-item-name">Ice Americano</div>
+                <div class="menu-item-desc">
+                  Double shots espresso with ice and still water
+                </div>
+                <div class="menu-item-details">
+                  <span class="menu-item-price">17 SR</span>
+                  <span class="menu-item-cal">2 cal</span>
+                </div>
+              </div>
+            </div>
+            <div class="menu-item">
+              <img
+                src="images/coffee/WhatsApp Image 2026-02-03 at 3.58.52 PM.jpeg"
+                alt="Ice Americano"
+              />
+              <div class="menu-item-info">
+                <div class="menu-item-name">Ice Americano</div>
+                <div class="menu-item-desc">
+                  Double shots espresso with ice and still water
+                </div>
+                <div class="menu-item-details">
+                  <span class="menu-item-price">17 SR</span>
+                  <span class="menu-item-cal">2 cal</span>
+                </div>
+              </div>
+            </div>
+            <div class="menu-item">
+              <img
+                src="images/coffee/WhatsApp Image 2026-02-03 at 4.00.12 PM.jpeg"
+                alt="Ice Americano"
+              />
+              <div class="menu-item-info">
+                <div class="menu-item-name">Ice Americano</div>
+                <div class="menu-item-desc">
+                  Double shots espresso with ice and still water
+                </div>
+                <div class="menu-item-details">
+                  <span class="menu-item-price">17 SR</span>
+                  <span class="menu-item-cal">2 cal</span>
+                </div>
+              </div>
+            </div>
+            <div class="menu-item">
+              <img
+                src="images/coffee/WhatsApp Image 2026-02-03 at 4.00.58 PM.jpeg"
+                alt="Ice Americano"
+              />
+              <div class="menu-item-info">
+                <div class="menu-item-name">Ice Americano</div>
+                <div class="menu-item-desc">
+                  Double shots espresso with ice and still water
+                </div>
+                <div class="menu-item-details">
+                  <span class="menu-item-price">17 SR</span>
+                  <span class="menu-item-cal">2 cal</span>
+                </div>
+              </div>
+            </div>
+            <div class="menu-item">
+              <img
+                src="images/coffee/WhatsApp Image 2026-02-03 at 4.01.58 PM.jpeg"
+                alt="Ice Americano"
+              />
+              <div class="menu-item-info">
+                <div class="menu-item-name">Ice Americano</div>
+                <div class="menu-item-desc">
+                  Double shots espresso with ice and still water
+                </div>
+                <div class="menu-item-details">
+                  <span class="menu-item-price">17 SR</span>
+                  <span class="menu-item-cal">2 cal</span>
+                </div>
+              </div>
+            </div>
+            <div class="menu-item">
+              <img
+                src="images/coffee/WhatsApp Image 2026-02-03 at 4.00.58 PM.jpeg"
+                alt="Ice Americano"
+              />
+              <div class="menu-item-info">
+                <div class="menu-item-name">Ice Americano</div>
+                <div class="menu-item-desc">
+                  Double shots espresso with ice and still water
+                </div>
+                <div class="menu-item-details">
+                  <span class="menu-item-price">17 SR</span>
+                  <span class="menu-item-cal">2 cal</span>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
 
-        <div class="footer">
-            <h2>Wish by Saws</h2>
-            <p style="margin-top: 10px;">Everything You Wish For</p>
-            <p style="margin-top: 20px; font-size: 0.9em;">Scan QR code to view this menu</p>
+        <!-- MATCHA SECTION -->
+        <div class="category" data-category="matcha">
+          <h2 class="category-title">🍵 Matcha</h2>
+          <div class="menu-grid">
+            <div class="menu-item">
+              <img src="images/1000010506.jpg" alt="Matcha Latte" />
+              <div class="menu-item-info">
+                <div class="menu-item-name">Matcha Latte (Hot)</div>
+                <div class="menu-item-desc">Matcha powder with hot milk</div>
+                <div class="menu-item-details">
+                  <span class="menu-item-price">24 SR</span>
+                  <span class="menu-item-cal">355 cal</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="menu-item">
+              <img src="images/1000010512.jpg" alt="Ice Matcha Latte" />
+              <div class="menu-item-info">
+                <div class="menu-item-name">Ice Matcha Latte</div>
+                <div class="menu-item-desc">Matcha powder, ice and milk</div>
+                <div class="menu-item-details">
+                  <span class="menu-item-price">24 SR</span>
+                  <span class="menu-item-cal">190 cal</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="menu-item">
+              <img src="images/1000010503.jpg" alt="Ice Sweet Matcha" />
+              <div class="menu-item-info">
+                <div class="menu-item-name">Ice Sweet Matcha</div>
+                <div class="menu-item-desc">
+                  Matcha powder, spanish mixture milk and ice
+                </div>
+                <div class="menu-item-details">
+                  <span class="menu-item-price">26 SR</span>
+                  <span class="menu-item-cal">330 cal</span>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
+
+        <!-- DRINKS & JUICES SECTION -->
+        <div class="category" data-category="drinks">
+          <h2 class="category-title">🍹 Drinks & Juices</h2>
+          <div class="menu-grid">
+            <div class="menu-item">
+              <img src="images/1000010476.jpg" alt="Fresh Orange Juice" />
+              <div class="menu-item-info">
+                <div class="menu-item-name">Fresh Orange Juice</div>
+                <div class="menu-item-desc">100% fresh juice</div>
+                <div class="menu-item-details">
+                  <span class="menu-item-price">18 SR</span>
+                  <span class="menu-item-cal">128 cal</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="menu-item">
+              <img src="images/1000010479.jpg" alt="Fresh Pineapple Juice" />
+              <div class="menu-item-info">
+                <div class="menu-item-name">Fresh Pineapple Juice</div>
+                <div class="menu-item-desc">100% fresh juice</div>
+                <div class="menu-item-details">
+                  <span class="menu-item-price">18 SR</span>
+                  <span class="menu-item-cal">130 cal</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="menu-item">
+              <img src="images/1000010494.jpg" alt="Protein Shake Vanilla" />
+              <div class="menu-item-info">
+                <div class="menu-item-name">Protein Shake (Vanilla)</div>
+                <div class="menu-item-desc">
+                  Made with banana, peanut butter and your choice of milk,
+                  protein powder 30g
+                </div>
+                <div class="menu-item-details">
+                  <span class="menu-item-price">24 SR</span>
+                  <span class="menu-item-cal">330 cal</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="menu-item">
+              <img src="images/1000010500.jpg" alt="Protein Shake Chocolate" />
+              <div class="menu-item-info">
+                <div class="menu-item-name">Protein Shake (Chocolate)</div>
+                <div class="menu-item-desc">
+                  Made with banana, peanut butter and your choice of milk,
+                  protein powder 30g
+                </div>
+                <div class="menu-item-details">
+                  <span class="menu-item-price">24 SR</span>
+                  <span class="menu-item-cal">330 cal</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="menu-item">
+              <img src="images/1000010497.jpg" alt="Lemon Mojito" />
+              <div class="menu-item-info">
+                <div class="menu-item-name">Lemon Mojito</div>
+                <div class="menu-item-desc">
+                  Fresh lemon & mint with lemon syrup
+                </div>
+                <div class="menu-item-details">
+                  <span class="menu-item-price">22 SR</span>
+                  <span class="menu-item-cal">243 cal</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="menu-item">
+              <img src="images/1000010545.jpg" alt="Raspberry Mojito" />
+              <div class="menu-item-info">
+                <div class="menu-item-name">Raspberry Mojito</div>
+                <div class="menu-item-desc">
+                  Fresh raspberry, lemon, mint with raspberry syrup
+                </div>
+                <div class="menu-item-details">
+                  <span class="menu-item-price">25 SR</span>
+                  <span class="menu-item-cal">244 cal</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- BOWLS SECTION -->
+        <div class="category" data-category="bowls">
+          <h2 class="category-title">🥗 Bowls</h2>
+          <div class="menu-grid">
+            <div class="menu-item">
+              <img src="images/1000010458.jpg" alt="Cinnamon Oats Big" />
+              <div class="menu-item-info">
+                <div class="menu-item-name">Cinnamon Oats (Big)</div>
+                <div class="menu-item-desc">
+                  Oats, cinnamon, peanut butter, low fat milk, honey and whey
+                  protein 40g, fresh apple, pecan
+                </div>
+                <div class="menu-item-details">
+                  <span class="menu-item-price">31 SR</span>
+                  <span class="menu-item-cal">370 cal</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="menu-item">
+              <img src="images/1000010539.jpg" alt="Cinnamon Oats Small" />
+              <div class="menu-item-info">
+                <div class="menu-item-name">Cinnamon Oats (Small)</div>
+                <div class="menu-item-desc">
+                  Oats, cinnamon, peanut butter, low fat milk, honey and whey
+                  protein 20g, fresh apple, pecan
+                </div>
+                <div class="menu-item-details">
+                  <span class="menu-item-price">18 SR</span>
+                  <span class="menu-item-cal">185 cal</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="menu-item">
+              <img src="images/1000010461.jpg" alt="Fruits Oats Big" />
+              <div class="menu-item-info">
+                <div class="menu-item-name">Fruits Oats (Big)</div>
+                <div class="menu-item-desc">
+                  Oats, cinnamon, peanut butter, low fat milk, honey and whey
+                  protein 40g, raspberry, blueberry, banana
+                </div>
+                <div class="menu-item-details">
+                  <span class="menu-item-price">31 SR</span>
+                  <span class="menu-item-cal">370 cal</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="menu-item">
+              <img src="images/1000010482.jpg" alt="Cilantro Salad" />
+              <div class="menu-item-info">
+                <div class="menu-item-name">Cilantro Salad</div>
+                <div class="menu-item-desc">
+                  Mix of iceberg lettuce, long lettuce, red cabbage, bell
+                  pepper, black olives, sun dried tomato, chicken breast, sweet
+                  corn, fried okra, fried chips and shredded fried potato.
+                  Served with house made cilantro sauce
+                </div>
+                <div class="menu-item-details">
+                  <span class="menu-item-price">26 SR</span>
+                  <span class="menu-item-cal">155 cal</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- DESSERTS SECTION -->
+        <div class="category" data-category="desserts">
+          <h2 class="category-title">🍰 Desserts</h2>
+          <div class="menu-grid">
+            <div class="menu-item">
+              <img src="images/1000010470.jpg" alt="Mix Berry Cheesecake" />
+              <div class="menu-item-info">
+                <div class="menu-item-name">Mix Berry Cheesecake</div>
+                <div class="menu-item-desc">
+                  Premium cheese with raspberry sauce with fresh raspberry and
+                  blueberry
+                </div>
+                <div class="menu-item-details">
+                  <span class="menu-item-price">26 SR</span>
+                  <span class="menu-item-cal">450 cal</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="menu-item">
+              <img src="images/1000010473.jpg" alt="Caramel Pecan Cheesecake" />
+              <div class="menu-item-info">
+                <div class="menu-item-name">Caramel Pecan Cheesecake</div>
+                <div class="menu-item-desc">
+                  Premium cheese with caramel sauce and caramelized pecan nuts
+                </div>
+                <div class="menu-item-details">
+                  <span class="menu-item-price">26 SR</span>
+                  <span class="menu-item-cal">450 cal</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="menu-item">
+              <img src="images/1000010464.jpg" alt="Tiramisu" />
+              <div class="menu-item-info">
+                <div class="menu-item-name">Tiramisu</div>
+                <div class="menu-item-desc">
+                  With espresso shot bonomi biscuits, mascarpone cheese,
+                  whipping cream
+                </div>
+                <div class="menu-item-details">
+                  <span class="menu-item-price">26 SR</span>
+                  <span class="menu-item-cal">520 cal</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="menu-item">
+              <img src="images/1000010467.jpg" alt="Chocolate Banana Cake" />
+              <div class="menu-item-info">
+                <div class="menu-item-name">Chocolate Banana Cake</div>
+                <div class="menu-item-desc">
+                  Chocolate flavour with banana mix
+                </div>
+                <div class="menu-item-details">
+                  <span class="menu-item-price">13 SR</span>
+                  <span class="menu-item-cal">302 cal</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="menu-item">
+              <img src="images/1000010488.jpg" alt="Gishd" />
+              <div class="menu-item-info">
+                <div class="menu-item-name">Gishd</div>
+                <div class="menu-item-desc">
+                  Made with date pecan with caramel mixed
+                </div>
+                <div class="menu-item-details">
+                  <span class="menu-item-price">13 SR</span>
+                  <span class="menu-item-cal">210 cal</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="footer">
+        <h2>Wish by Saws</h2>
+        <p style="margin-top: 10px">Everything You Wish For</p>
+        <p style="margin-top: 20px; font-size: 0.9em">
+          Scan QR code to view this menu
+        </p>
+      </div>
     </div>
 
     <script>
-        function showCategory(category) {
-            const categories = document.querySelectorAll('.category');
-            const buttons = document.querySelectorAll('.nav-btn');
-            
-            buttons.forEach(btn => btn.classList.remove('active'));
-            event.target.classList.add('active');
-            
-            if (category === 'all') {
-                categories.forEach(cat => cat.style.display = 'block');
+      function showCategory(category) {
+        const categories = document.querySelectorAll(".category");
+        const buttons = document.querySelectorAll(".nav-btn");
+
+        buttons.forEach((btn) => btn.classList.remove("active"));
+        event.target.classList.add("active");
+
+        if (category === "all") {
+          categories.forEach((cat) => (cat.style.display = "block"));
+        } else {
+          categories.forEach((cat) => {
+            if (cat.dataset.category === category) {
+              cat.style.display = "block";
             } else {
-                categories.forEach(cat => {
-                    if (cat.dataset.category === category) {
-                        cat.style.display = 'block';
-                    } else {
-                        cat.style.display = 'none';
-                    }
-                });
+              cat.style.display = "none";
             }
+          });
         }
+      }
     </script>
-</body>
+  </body>
 </html>
